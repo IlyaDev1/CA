@@ -1,0 +1,20 @@
+# core/domain/сущность/exceptions.py
+
+
+from enum import StrEnum
+
+from src.core.abc.exceptions import ExtendedException
+
+
+class IntentClassifierErrorCode(StrEnum):
+    MENU_NOT_DEFINED = "MENU_NOT_DEFINED"
+
+
+class IntentClassifierError(ExtendedException):
+    default_message = "intent classifier unexpected error"
+
+
+class MenuIntentClassifierNotDefinedError(IntentClassifierError):
+    """Не выбран ни один из нужных пунктов меню."""
+
+    code = IntentClassifierErrorCode.MENU_NOT_DEFINED

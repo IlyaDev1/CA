@@ -1,0 +1,25 @@
+# core/abc/exception.py
+
+
+from enum import StrEnum
+
+
+class BaseErrorCode(StrEnum):
+    """Базовые коды ошибок"""
+
+    UNKNOWN_ERROR = "UNKNOWN_ERROR"
+
+
+class ExtendedException(Exception):
+    """Расширенный класс ошибки"""
+
+    default_message: str = "Unknown exception occurred"
+    code: str = BaseErrorCode.UNKNOWN_ERROR
+
+    def __init__(self, message: str | None = None, **context):
+        self.message = message or self.default_message
+        self.context = context  # Здесь можно сохранять произвольные вспомогательные данные об ошибке
+        super().__init__(self.message)
+
+    def __str__(self):
+        return f"{self.message} | Context: {self.context}"
